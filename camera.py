@@ -52,8 +52,11 @@ while (cap.isOpened()) :
         faces_locations = face_recognition.face_locations(frame_rgb)
         faces_encodings = face_recognition.face_encodings(frame_rgb,faces_locations)
         for encoding in faces_encodings:
-            coincidencias = face_recognition.compare_faces(Adrian_encodings,encoding)
-            if coincidencias[0]:
+            coincidencias = []
+            for know in knowed_encodings:
+                temp_coincidence = face_recognition.compare_faces(know,encoding)
+                coincidencias.append(temp_coincidence)
+            if coincidencias[0][0]:
                 temp_name = knowed_names[0]
             else:
                 temp_name = "????"
