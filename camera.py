@@ -1,3 +1,8 @@
+############################
+#  FaceLibrary
+# this is a core prototype not abel to use
+# only allowed for development use
+
 import cv2
 import sys
 import face_recognition
