@@ -18,15 +18,27 @@ Adrian_encodings = face_recognition.face_encodings(Adrian)
 
 #encodings register: 
 
-knowed_encodings = [
-        Adrian_encodings
-]
+knowed_encodings = []
+knowed_names = []
 
 #names register:
+with open("names.txt","r") as names:
+    for name in names:
+        name = name.rstrip()
+        knowed_names.append(name)
+        temp_file = "faces/"+name+".jpg"
+        print(temp_file)
+        if os.path.exists(temp_file):
+            temp_image = face_recognition.load_image_file(temp_file)
+            knowed_encodings.append(face_recognition.face_encodings(temp_image))
+        else:
+            print(temp_file + " not exists,"+ name +" encodings not register"+"\n")
+print (knowed_names)
 
-knowed_names = [
-        "Adrian"
-]
+#check existences:
+if (not len(knowed_encodings)):
+    print("the encodings list is empty, add images and names to use the system")
+    exit(3)
 
 #CV variables:
 
