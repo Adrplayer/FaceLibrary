@@ -7,21 +7,14 @@ import cv2
 import sys
 import face_recognition
 import os
+import numpy as np
 
-#face loads:
 
-Adrian = face_recognition.load_image_file("faces/Adrian.jpg")
-
-#face encodings:
-
-Adrian_encodings = face_recognition.face_encodings(Adrian)
-
-#encodings register: 
-
+# knowed arrays
 knowed_encodings = []
 knowed_names = []
 
-#names register:
+#names/encodings register:
 with open("names.txt","r") as names:
     for name in names:
         name = name.rstrip()
@@ -30,7 +23,7 @@ with open("names.txt","r") as names:
         print(temp_file)
         if os.path.exists(temp_file):
             temp_image = face_recognition.load_image_file(temp_file)
-            knowed_encodings.append(face_recognition.face_encodings(temp_image))
+            knowed_encodings.append(face_recognition.face_encodings(temp_image)[0])
         else:
             print(temp_file + " not exists,"+ name +" encodings not register"+"\n")
 print (knowed_names)
@@ -53,25 +46,23 @@ cap = cv2.VideoCapture(0) # Video Capture (camera)
 #function to use face reconition
 while (cap.isOpened()) :
     ret,frame = cap.read() #read from camera
-    faces_locations = []
+    faces_locations = [] #location of the faces 
     faces_encodings = []
     faces_names = []
-    temp_name = []
     if ret:
         frame_rgb = frame[:,:,::-1]
         frame_rgb = cv2.resize(frame_rgb,(0,0),fx=1.0/reduction,fy=1.0/reduction)
         faces_locations = face_recognition.face_locations(frame_rgb)
         faces_encodings = face_recognition.face_encodings(frame_rgb,faces_locations)
+        faces_names = []
         for encoding in faces_encodings:
-            coincidencias = []
-            for know in knowed_encodings:
-                temp_coincidence = face_recognition.compare_faces(know,encoding)
-                coincidencias.append(temp_coincidence)
-            if coincidencias[0][0]:
-                temp_name = knowed_names[0]
-            else:
-                temp_name = "????"
-            print(coincidencias)
+            matches = face_recognition.compare_faces(knowed_encodings,encoding)
+            temp_name = "????"
+            print(matches)
+            face_distances = face_recognition.face_distance(knowed_encodings,encoding)
+            best_match_index = np.argmin(face_distances)
+            if matches[best_match_index]:
+                temp_name = knowed_names[best_match_index]
             faces_names.append(temp_name)
         for (top,right,bottom,left), temp_name in zip(faces_locations,faces_names):
             top = top * reduction
