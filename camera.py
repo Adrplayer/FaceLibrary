@@ -1,6 +1,4 @@
-import tkinter as tk
 import cv2
-from PIL import Image , ImageTk
 import sys
 import face_recognition
 import os
@@ -36,24 +34,8 @@ width, height = 800, 600 # frame dimensions
 cap = cv2.VideoCapture(0) # Video Capture (camera)
 
 
-#Tkinder implementation ( GUI )
-root = tk.Tk()
-root.bind("<Escape>", lambda e: root.quit())
-lmain = tk.Label(root)
-lmain.pack()
-
-# show frame function (GUI use)
-def show_frame():
-    frame = cal_frame()
-    cv2image = cv2.cvtColor(frame, cv2.COLOR_BGR2RGBA)
-    img = Image.fromarray(cv2image)
-    imgtk = ImageTk.PhotoImage(image=img)
-    lmain.imgtk = imgtk
-    lmain.configure(image=imgtk)
-    lmain.after(10, show_frame)
-
 #function to use face reconition
-def cal_frame():
+while (cap.isOpened()) :
     ret,frame = cap.read() #read from camera
     faces_locations = []
     faces_encodings = []
@@ -83,9 +65,16 @@ def cal_frame():
                 color = (0,0,255)
             cv2.rectangle(frame,(left,top),(right,bottom),color,2)
             cv2.rectangle(frame,(left,bottom-20),(right,bottom),color,-1)
-            cv2.putText(frame,temp_name,(left,bottom-6),font,0.6,(0,0,0),1)
-    return frame
+            cv2.putText(frame,temp_name,(left,bottom-6),font,0.6,(0,0,0),1) 
+        cv2.imshow("My Face",frame)
+        if cv2.waitKey(30) & 0xFF == ord('q'):
+            break
+    else:
+        print("No camera Conection")
+        break
 
 
-show_frame()
-root.mainloop()
+#close program
+cap.release() #clear memory
+cv2.destroyAllWindows() #close the opened windows
+
