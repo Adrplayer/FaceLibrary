@@ -37,8 +37,7 @@ print (knowed_names)
 
 #check existences:
 if (not len(knowed_encodings)):
-    print("the encodings list is empty, add images and names to use the system")
-    exit(3)
+    sys.exit("the encodings list is empty, add images and names to use the system")
 
 #CV variables:
 
