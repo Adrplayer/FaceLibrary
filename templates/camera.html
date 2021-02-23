@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Camera view</h1>
+<img src="{{url_for('video_feed')}}" id="streaming" >
+<h3 class="subtitle">Recognized faces</h3>
+<div class="card">
+    <div>
+        <img src="{{url_for('static',filename='img/Facetest.jpg')}}" class="card-img-top" id="faces">
+    </div>
+    <div class="facestext">
+        <p>Name: Adrian B</p>
+        <p>Access: Total</p>
+        <p>ID: #001</p>
+        <a href="#" class="btn btn-primary">Edit</a>
+
+    </div>
+</div>
+<div class="card">
+    <div>
+        <img src="{{url_for('static',filename='img/Facetest.jpg')}}" class="card-img-top" id="faces">
+    </div>
+    <div class="facestext">
+        <p>Name: ???????????</p>
+        <p>Access: Restricted</p>
+        <p>ID: #########</p>
+        <a href="#" class="btn btn-primary">Create</a>
+    </div>
+</div>
+        {% endblock%}

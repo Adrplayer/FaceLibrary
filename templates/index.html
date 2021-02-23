@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<header class="showcase" style="background-image: url({{url_for('static',filename='img/showcase.jpg')}});">
+    <h2>Welcome!</h2>
+    <p>Sit amet. Integer sed magna. Duis nisl nulla, porta ut, molestie sit amet,
+    tincidunt eu, enim. Cras eu mauris. Cras iaculis, nisi vel tempor fringilla,
+    nisl dolor imperdiet dolor, id lobortis.</p>
+</header>
+<section class="banner" id="Camera" style="background-image: url({{url_for('static',filename='img/camera.jpeg')}}); background-size:100%">
+    <div class="content">
+        <h2>Camera View</h2>
+        <p>Look the Camera input in real time, and watch the face recognition system work</p>
+        <a class="btn btn-primary" href="/camera" role="button">GO</a>
+    </div>
+</section>
+<section class="banner" id="Register" style="background-image: url({{url_for('static',filename='img/Server.jpg')}})">
+    <div class="row">
+        <div class="column" id=text>
+            <h2>Register</h2>
+            <p>Add your face, your family or friends to your home library and give them specific access</p>
+            <a class="btn btn-primary" href="/register" role="button">GO</a>
+        </div>
+        <div class="column">
+            <img src="{{url_for('static',filename='img/proyecto1.png')}}" id="logoR">
+        </div>
+    </div>
+</section>
+<section class="banner" id="Library" style="background-image: url({{url_for('static',filename='img/library.jpg')}})">
+    <div class="content">
+        <h2>Library</h2>
+        <p>here you can see the record of known faces that are part of your recognition system, which access they have and modify it if you wish</p>
+        <a class="btn btn-primary" href="/library" role="button">GO</a>
+    </div>
+</section>
+<section class="banner" id="About" style="background-image: url({{url_for('static',filename='img/about.jpg')}})">
+    <div class="content">
+        <h2>About Us</h2>
+        <p>Know more about this project, his source code and documentation</p>
+        <a class="btn btn-primary" href="/about" role="button">GO</a>
+    </div>
+</section>
+{%endblock%}

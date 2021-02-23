@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Register:</h1>
+<div class="form">
+    <div>
+        <img src="{{url_for('static', filename='img/Facetest.jpg')}}" class="faces">
+        <div class="btns">
+            <button type="button" class="btn btn-primary">Primary</button>
+            <button type="button" class="btn btn-secondary">Secondary</button>
+        </div>
+    </div>
+    <div class="f-text">
+        <h2>form:</h2>
+        <div class="mb-3">
+            <div>
+                <label for="exampleFormControlInput1" class="form-label">New user name</label>
+                <input type="Name" class="form-control" id="Name" placeholder="example name">
+            </div>
+            <div>
+                <label for="exampleFormControlTextarea1" class="form-label">New user lastname</label>
+                <input type="Lname" class="form-control" id="exampleFormControlInput1" placeholder="Last name">
+            </div>
+        </div>
+        <div class="mb-3">
+            <div>
+                <label for="exampleFormControlTextarea1" class="form-label">Access</label>
+                <select class="form-select" aria-label="Default select example">
+                    <option selected value="0">invited</option>
+                    <option value="1">Total</option>
+                    <option value="2">Welcome</option>
+                    <option value="3">not welcome</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+{% endblock%}

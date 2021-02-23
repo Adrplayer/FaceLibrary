@@ -8,7 +8,10 @@ import sys
 import face_recognition
 import os
 import numpy as np
+from flask import Flask, render_template, Response
+import json
 
+cap = cv2.VideoCapture(cv2.CAP_V4L2) # Video Capture (camera)
 
 # knowed arrays
 knowed_encodings = []
@@ -40,11 +43,10 @@ font = cv2.FONT_HERSHEY_COMPLEX #font to show the names in the render system
 
 width, height = 800, 600 # frame dimensions
 
-cap = cv2.VideoCapture(0) # Video Capture (camera)
 
 
 #function to use face reconition
-while (cap.isOpened()) :
+def gen_frame():
     ret,frame = cap.read() #read from camera
     faces_locations = [] #location of the faces 
     faces_encodings = []
@@ -76,15 +78,39 @@ while (cap.isOpened()) :
             cv2.rectangle(frame,(left,top),(right,bottom),color,2)
             cv2.rectangle(frame,(left,bottom-20),(right,bottom),color,-1)
             cv2.putText(frame,temp_name,(left,bottom-6),font,0.6,(0,0,0),1) 
-        cv2.imshow("My Face",frame)
-        if cv2.waitKey(30) & 0xFF == ord('q'):
-            break
-    else:
-        print("No camera Conection")
-        break
+            frame_byte=frame.tobytes()
+            yield (b'--frame_byte\r\n'
+                   b'Content-Type: image/jpeg\r\n\r\n' + frame_byte + b'\r\n')
+        else:
+            print("No camera Conection")
 
 
-#close program
-cap.release() #clear memory
-cv2.destroyAllWindows() #close the opened windows
+#initialize flask
+app = Flask(__name__)
 
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/camera')
+def cam():
+    return render_template('camera.html')
+
+@app.route('/library')
+def library():
+    return render_template('library.html')
+
+@app.route('/register')
+def register():
+    return render_template('register.html')
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+@app.route('/video_feed')
+def video_feed():
+    return Response(gen_frame(), mimetype='multipart/x-mixed-replace; boundary=frame_byte')
+
+if __name__ == "__main__":
+    app.run(debug=True)
