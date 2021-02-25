@@ -7,7 +7,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 }
 
 .showcase{
-	width:100%;
+	width:50%;
 	height:550px;
 	padding-bottom: 50px;
 	display: flex;
@@ -115,7 +115,6 @@ margin: 10px;
 
 .btns{
 padding: 10px;
-padding-left: 140px;
 }
 
 .faces{

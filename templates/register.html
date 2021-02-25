@@ -4,38 +4,46 @@
 <h1>Register:</h1>
 <div class="form">
     <div>
-        <img src="{{url_for('static', filename='img/Facetest.jpg')}}" class="faces">
-        <div class="btns">
-            <button type="button" class="btn btn-primary">Primary</button>
-            <button type="button" class="btn btn-secondary">Secondary</button>
-        </div>
+        <img src="{{url_for('static', filename='img/Facetest.jpg')}}" class="faces" id ="preview">
     </div>
     <div class="f-text">
         <h2>form:</h2>
-        <div class="mb-3">
-            <div>
-                <label for="exampleFormControlInput1" class="form-label">New user name</label>
-                <input type="Name" class="form-control" id="Name" placeholder="example name">
+        <form method="POST" enctype="multipart/form-data">
+            <div class="mb-3">
+                <div>
+                    <label for="exampleFormControlInput1" class="form-label">New user name</label>
+                    <input type="text" class="form-control" placeholder="example name"name="name">
+                </div>
+                <div>
+                    <label for="exampleFormControlTextarea1" class="form-label">New user lastname</label>
+                    <input type="text" name="last" class="form-control" placeholder="Last name">
+                </div>
             </div>
-            <div>
-                <label for="exampleFormControlTextarea1" class="form-label">New user lastname</label>
-                <input type="Lname" class="form-control" id="exampleFormControlInput1" placeholder="Last name">
+            <div class="mb-3">
+                <div>
+                    <label for="exampleFormControlTextarea1" class="form-label">Id</label>
+                    <input class="form-control" name="id" type="text" placeholder="ID" aria-label="default input example" value="{{_id}}">     
+                </div>
+                <div>
+                    <label for="exampleFormControlTextarea1" class="form-label">Face image</label>
+                    <input class="form-control" type="file" name="file" id="file">
+                </div>
             </div>
-        </div>
-        <div class="mb-3">
-            <div>
-                <label for="exampleFormControlTextarea1" class="form-label">Access</label>
-                <select class="form-select" aria-label="Default select example">
-                    <option selected value="0">invited</option>
-                    <option value="1">Total</option>
-                    <option value="2">Welcome</option>
-                    <option value="3">not welcome</option>
-                </select>
+            <div class="mb-3">
+                <div>
+                    <label for="exampleFormControlTextarea1" class="form-label">Access</label>
+                    <select class="form-select" name="access" aria-label="Default select example">
+                        <option selected value="0">invited</option>
+                        <option value="1">Total</option>
+                        <option value="2">Welcome</option>
+                        <option value="3">not welcome</option>
+                    </select>
+
+                    <input type="submit" value="Upload" style="margin-top: 20px;">
+                </div>
             </div>
-        </div>
+        </form>
     </div>
 </div>
-</div>
-</div>
-
+<script src="{{url_for('static', filename='js/register.js')}}"></script>
 {% endblock%}

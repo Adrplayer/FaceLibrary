@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<header class="showcase" style="background-image: url({{url_for('static',filename='img/showcase.jpg')}});">
+<header class="showcase" style="background-image: url({{url_for('static',filename='img/showcase.jpg')}}); background-size:100%">
     <h2>Welcome!</h2>
     <p>Sit amet. Integer sed magna. Duis nisl nulla, porta ut, molestie sit amet,
     tincidunt eu, enim. Cras eu mauris. Cras iaculis, nisi vel tempor fringilla,
@@ -14,7 +14,7 @@
         <a class="btn btn-primary" href="/camera" role="button">GO</a>
     </div>
 </section>
-<section class="banner" id="Register" style="background-image: url({{url_for('static',filename='img/Server.jpg')}})">
+<section id="Register" style="background-image: url({{url_for('static',filename='img/Server.jpg')}})"class="banner" >
     <div class="row">
         <div class="column" id=text>
             <h2>Register</h2>
