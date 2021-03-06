@@ -13,10 +13,10 @@ class datab(object):
 
     def register(self,file_stream,_id,name,last,access):
         img = load_image_file(file_stream)
-        encoding = face_encodings(img)
+        encoding = face_encodings(img)[0]
         access = int(access)
         if len(encoding) > 0 and len(encoding) < 2:
-            encoding = encoding[0].tolist()
+            encoding = encoding.tolist()
             print(encoding)
             self.faces.insert_many([
                 {"_id": _id, "name":name,"last":last,"access":access,"encoding":encoding}
